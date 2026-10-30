@@ -5,7 +5,8 @@ the diff, you answer its questions about anything suspicious, and the agreed com
 to GitHub from your own account. Approval is yours, every time.
 
 This is not the security audit. That is a separate kit (`claude-security-audit`) with its own
-auditor and its own gate. This one covers correctness, contracts, project conventions and tests.
+auditor and its own gate. This one covers correctness, contracts, project conventions, tests,
+data modelling and efficiency that matters at real scale.
 
 ## The pieces
 
@@ -28,6 +29,10 @@ Plus `pr-review-rules.md` (what matters in this project's reviews) and `pr-revie
 Then fill `.claude/pr-review-rules.md`, check `gh auth status`, and commit `.claude/`. In Claude
 Code, `/pr-review-init` does all of it, including writing the rules from the project's own
 conventions.
+
+**Start a new Claude Code session before the first review**: subagents in `.claude/agents/` are
+discovered at session start, so the reviewer is not dispatchable in the session that installed
+it.
 
 Colleagues get the reviewer, the command and the script by cloning. Each of them runs
 `gh auth login` once on their own machine, because a review is posted from a real account.

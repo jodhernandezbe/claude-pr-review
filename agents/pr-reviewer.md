@@ -33,14 +33,26 @@ not a finding, unless the change makes it reachable or worse.
    rule or the neighbour, never personal taste.
 4. **Tests**: a behaviour the change introduces that nothing exercises; a test that cannot fail;
    a test asserting the implementation rather than the behaviour.
-5. **Clarity and duplication**: a name that misleads, a function doing two jobs, a third copy of
+5. **Data modelling and types**: a type that admits a state the code cannot handle; one wide
+   dictionary where the project passes focused records; a nullable field that forces every
+   caller to re-check something the producer already knew; a quantity carried as a bare number
+   where the project has a type or unit for it; a schema or model changed without the data that
+   feeds it. Not annotations the type checker already enforces.
+6. **Efficiency, where it changes behaviour at realistic scale**: a network, disk or database
+   call inside a loop; work repeated per item that could be done once; a quadratic pass over
+   data that grows with the input; a cache that will never hit because its key varies. Name the
+   scale that makes it matter. Never micro-optimise, and never trade clarity for speed that
+   nobody measured.
+7. **Clarity and duplication**: a name that misleads, a function doing two jobs, a third copy of
    logic that must change together. Only where it will cost someone later.
 
 ## What not to report
 
-- Style a formatter or linter already owns.
+- Style a formatter or linter already owns, and annotations the type checker already enforces.
 - Preference dressed as a rule. If you cannot cite a project rule or a neighbouring pattern, it
   is a question, not a finding.
+- Performance you have not reasoned about at a concrete scale. "This could be faster" is noise;
+  "this calls the API once per facility and the workspace holds hundreds" is a finding.
 - Security defects: say they belong to the audit.
 - Praise. The author does not need it, and it hides the findings.
 - Anything you cannot anchor to a specific line of the diff.
