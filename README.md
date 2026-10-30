@@ -20,7 +20,27 @@ data modelling and efficiency that matters at real scale.
 Plus `pr-review-rules.md` (what matters in this project's reviews) and `pr-review-gh-setup.md`
 (the one-time GitHub CLI setup for each reviewer).
 
-## Install
+## The one command
+
+Once per machine, link the user-level init command:
+
+```sh
+ln -sf ~/Documents/claude-pr-review/user-command/pr-review-init.md ~/.claude/commands/pr-review-init.md
+```
+
+It is a symlink, so editing the kit updates the command everywhere. A new command appears in the
+next Claude Code session.
+
+Then, in any project:
+
+```
+/pr-review-init
+```
+
+It runs the installer, writes the review rules from the project's own conventions, checks the
+GitHub CLI, proves the path as far as a dry run, and lists the files to commit.
+
+## Install by hand
 
 ```sh
 ./install.sh /path/to/project
