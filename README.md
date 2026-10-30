@@ -72,6 +72,12 @@ This is the part that matters, and it is enforced in the command, not left to go
 An approval posted this way is your signature on the change. It does not bypass branch
 protection, required reviewers or code owners.
 
+**You cannot give a verdict on your own pull request.** GitHub rejects both approval and a
+request for changes when the author and the reviewing account are the same, with a 422. The
+script checks this before sending and says so; the findings still post as a comment with the
+intended verdict stated in the body. Testing the workflow on your own pull request therefore
+exercises everything except the verdict.
+
 ## Why a separate reviewer
 
 A model that just wrote the code is the worst judge of it, and a model handed a conclusion
