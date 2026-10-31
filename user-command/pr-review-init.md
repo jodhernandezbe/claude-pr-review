@@ -6,11 +6,13 @@ Incorporate the pr-review kit from `~/Documents/claude-pr-review` into the proje
 current working directory. Everything lands inside the project and is meant to be committed, so
 colleagues need to install nothing beyond the GitHub CLI on their own machine.
 
+0. **Resolve the project root.** Run `git rev-parse --show-toplevel` and use that path, not the directory you happen to be standing in. `.claude/` belongs at the repository root so Claude Code finds it from anywhere in the project. The installer refuses a root that is a subdirectory and prints the correct command; if you see that, fix the path rather than working around it.
+
 1. **Check the repository has a GitHub remote.** `git remote -v` and `gh repo view` (if `gh` is
    installed). If the project is not on GitHub, say so and stop: this kit posts through
    GitHub's review API and has nothing to offer elsewhere.
 
-2. **Run the installer**: `~/Documents/claude-pr-review/install.sh "$PWD"`. Report what it
+2. **Run the installer**: `~/Documents/claude-pr-review/install.sh "$(git rev-parse --show-toplevel)"`. Report what it
    printed.
 
 3. **Tell the user the subagent needs a new session.** Claude Code discovers `.claude/agents/`
